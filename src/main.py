@@ -6,6 +6,7 @@ from Bio import SeqIO
 import os
 import subprocess
 from tqdm import tqdm
+import sys
 
 def read_organism_table(org_table_filename):
     """
