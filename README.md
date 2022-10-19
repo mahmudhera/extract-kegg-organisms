@@ -1,4 +1,4 @@
-There are 114 genomes in total.
+There are 113 genomes in total.
 In every genome, there is the fasta sequence, and the mapping file.
 The mapping file contains information of a gene -- genes that are present within that organism.
 The start location, end location, nucleotide sequence, and amino acid sequence -- all are these.
@@ -15,3 +15,9 @@ conda create -y --name extract_kegg
 conda install -y --name extract_kegg -c conda-forge -c bioconda --file requirements.txt
 conda activate extract_kegg
 ```
+
+## Run
+`python src/main.py`
+
+## Present genomes
+Listed in list_of_genomes
