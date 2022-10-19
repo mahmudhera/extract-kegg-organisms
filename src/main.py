@@ -127,6 +127,8 @@ def main(): # pragma: no cover
     args = parse_args()
     print('Test!')
 
+    genome_path = '/home/grads/mbr5797/kegg-extracted-data/extracted_genomes'
+
     # get a list of all genomes in our directory
     genome_dir_names = [x[0] for x in os.walk(genome_path)][1:]
     for genome_dir in genome_dir_names[:10]:
