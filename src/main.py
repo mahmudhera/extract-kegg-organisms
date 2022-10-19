@@ -128,21 +128,30 @@ def main(): # pragma: no cover
     print('Test!')
 
     genome_path = '/home/grads/mbr5797/kegg-extracted-data/extracted_genomes'
+    directory_with_kegg_gene_files = '/data/shared_data/KEGG_data/organisms/kegg_gene_info'
 
-    # get a list of all genomes in our directory
+    present_genes_and_kos = []
     genome_dir_names = [x[0] for x in os.walk(genome_path)][1:]
-    for genome_dir in genome_dir_names[:10]:
+    for genome_dir in genome_dir_names[:1]:
         genome_name = genome_dir.split('/')[-1]
-        print(genome_name)
+        mapping_filename = genome_name + '_mapping.csv'
 
-    # for all of these genomes:
-        # get list of all the gene ids
-        # get gene_and_ko_list
-        # index by gene_id
-        # for only the genes present in ours:
-            # get the ko_id
-            # add <gene_id, ko_id> in a dataframe
-    # write dataframe
+        df = pd.read_csv(genome_dir+'/'+mapping_filename, delimiter=',')
+        genes_present_in_mapping_file = df['gene_name'].tolist()
+
+        org_code = genome_name
+        gene_filename = make_kegg_gene_file_name(org_code)
+        file_with_path = directory_with_kegg_gene_files + '/' + gene_filename
+        gene_and_ko_list = read_gene_id_with_kos_labeled(gene_file_with_path)
+
+        gene_id_to_ko_id = {}
+        for (gene_id, ko_id, nt_seq, aa_seq) in gene_and_ko_list:
+            gene_id_to_ko_id [gene_id] = ko_id
+
+        for present_gene in genes_present_in_mapping_file[:5]:
+            present_genes_and_kos.append( (present_gene, gene_id_to_ko_id [present_gene]) )
+
+    df.to_csv('present_genes_and_koids.csv')
 
 
 if __name__ == '__main__': # pragma: no cover
