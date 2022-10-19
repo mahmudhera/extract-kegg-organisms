@@ -130,11 +130,14 @@ def main(): # pragma: no cover
     genome_path = '/home/grads/mbr5797/kegg-extracted-data/extracted_genomes'
     directory_with_kegg_gene_files = '/data/shared_data/KEGG_data/organisms/kegg_gene_info'
 
+    genome_names = []
     present_genes_and_kos = []
     genome_dir_names = [x[0] for x in os.walk(genome_path)][1:]
     for genome_dir in tqdm(genome_dir_names):
         genome_name = genome_dir.split('/')[-1]
         mapping_filename = genome_name + '_mapping.csv'
+
+        genome_names.append(genome_name)
 
         df = pd.read_csv(genome_dir+'/'+mapping_filename, delimiter=',')
         genes_present_in_mapping_file = df['gene_name'].tolist()
@@ -153,6 +156,10 @@ def main(): # pragma: no cover
 
     df = pd.DataFrame(present_genes_and_kos, columns=['gene_id', 'ko_id'])
     df.to_csv('present_genes_and_koids.csv')
+
+    with open('list_of_genomes', 'w') as sys.stdout:
+        for genome_name in genome_names:
+            print(genome_name)
 
 
 if __name__ == '__main__': # pragma: no cover
