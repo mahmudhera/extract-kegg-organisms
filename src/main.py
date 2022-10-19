@@ -151,6 +151,7 @@ def main(): # pragma: no cover
         for present_gene in genes_present_in_mapping_file[:5]:
             present_genes_and_kos.append( (present_gene, gene_id_to_ko_id [present_gene]) )
 
+    df = pd.DataFrame(present_genes_and_kos, columns=['gene_id', 'ko_id'])
     df.to_csv('present_genes_and_koids.csv')
 
 
