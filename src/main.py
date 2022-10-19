@@ -141,7 +141,7 @@ def main(): # pragma: no cover
 
         org_code = genome_name
         gene_filename = make_kegg_gene_file_name(org_code)
-        file_with_path = directory_with_kegg_gene_files + '/' + gene_filename
+        gene_file_with_path = directory_with_kegg_gene_files + '/' + gene_filename
         gene_and_ko_list = read_gene_id_with_kos_labeled(gene_file_with_path)
 
         gene_id_to_ko_id = {}
