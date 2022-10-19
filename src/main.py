@@ -132,7 +132,7 @@ def main(): # pragma: no cover
 
     present_genes_and_kos = []
     genome_dir_names = [x[0] for x in os.walk(genome_path)][1:]
-    for genome_dir in genome_dir_names[:1]:
+    for genome_dir in tqdm(genome_dir_names):
         genome_name = genome_dir.split('/')[-1]
         mapping_filename = genome_name + '_mapping.csv'
 
@@ -148,7 +148,7 @@ def main(): # pragma: no cover
         for (gene_id, ko_id, nt_seq, aa_seq) in gene_and_ko_list:
             gene_id_to_ko_id [gene_id] = ko_id
 
-        for present_gene in genes_present_in_mapping_file[:5]:
+        for present_gene in genes_present_in_mapping_file:
             present_genes_and_kos.append( (present_gene, gene_id_to_ko_id [present_gene]) )
 
     df = pd.DataFrame(present_genes_and_kos, columns=['gene_id', 'ko_id'])
