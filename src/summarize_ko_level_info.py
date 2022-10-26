@@ -50,4 +50,4 @@ if __name__ == '__main__':
         out_list.append((ko_id, ko_abundances[ko_id]))
 
     out_df = pd.DataFrame(out_list, columns=['ko_id', 'abundance'])
-    df.to_csv( out_df, output_filename )
+    out_df.to_csv( out_df, output_filename )
