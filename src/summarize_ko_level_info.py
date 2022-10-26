@@ -20,5 +20,7 @@ if __name__ == '__main__':
     nt_ovelaps = gene_abundance_df['nucleotide_overlap'].tolist()
     list_reads_mapped = gene_abundance_df['reads_mapped'].tolist()
 
+    total_num_reads = sum(list_reads_mapped)
+
     for gene_name, gene_length, nt_overlap, num_reads_mapped in list( zip(gene_names, gene_lengths, nt_ovelaps, list_reads_mapped) ):
-        print(gene_name, )
+        print(gene_name + ' ' + str(1.0*num_reads_mapped/total_num_reads))
