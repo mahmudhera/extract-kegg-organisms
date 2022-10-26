@@ -21,6 +21,23 @@ if __name__ == '__main__':
     list_reads_mapped = gene_abundance_df['reads_mapped'].tolist()
 
     total_num_reads = sum(list_reads_mapped)
+    total_nucleotides_covered = sum(nt_ovelaps)
+
+    abundance_estimates_using_num_reads = []
+    abundance_estimates_using_nt_overlap = []
+
+    test = 0
+    test2 = 0
 
     for gene_name, gene_length, nt_overlap, num_reads_mapped in list( zip(gene_names, gene_lengths, nt_ovelaps, list_reads_mapped) ):
-        print(gene_name + ' ' + str(1.0*num_reads_mapped/total_num_reads))
+        abundance_estimate_1 = 1.0 * num_reads_mapped / total_num_reads
+        abundance_estimate_2 = 1.0 * nt_overlap / total_nucleotides_covered
+
+        abundance_estimates_using_num_reads.append( gene_name, abundance_estimate_1 )
+        abundance_estimates_using_nt_overlap.append( gene_name, abundance_estimate_2 )
+
+        test += abundance_estimate_1
+        test2 += abundance_estimate_2
+
+    print(test)
+    print(test2)
