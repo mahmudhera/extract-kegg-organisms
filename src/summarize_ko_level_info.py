@@ -23,15 +23,11 @@ if __name__ == '__main__':
     total_num_reads = sum(list_reads_mapped)
     total_nucleotides_covered = sum(nt_ovelaps)
 
-    test = 0
-    test2 = 0
+    ko_abundances = {}
 
     for gene_name, gene_length, nt_overlap, num_reads_mapped in list( zip(gene_names, gene_lengths, nt_ovelaps, list_reads_mapped) ):
         abundance_estimate_1 = 1.0 * num_reads_mapped / total_num_reads
         abundance_estimate_2 = 1.0 * nt_overlap / total_nucleotides_covered
 
-        test += abundance_estimate_1
-        test2 += abundance_estimate_2
-
-    print(test)
-    print(test2)
+    gene_koid_df = pd.read_csv(present_genes_filename)
+    print(gene_koid_df.sample(10))
