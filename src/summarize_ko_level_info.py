@@ -43,5 +43,8 @@ if __name__ == '__main__':
         else:
             ko_abundances[ko_id] = abundance_estimate_1
 
+    test = 0.0
     for ko_id in ko_abundances.keys():
         print(ko_id, ko_abundances[ko_id])
+        test += ko_abundances[ko_id]
+    print(test)
