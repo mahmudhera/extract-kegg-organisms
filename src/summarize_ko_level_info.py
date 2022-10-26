@@ -15,4 +15,10 @@ if __name__ == '__main__':
     gene_abundance_filename = args.gene_abundance
 
     gene_abundance_df = pd.read_csv(gene_abundance_filename)
-    print(gene_abundance_df.sample(10))
+    gene_names = gene_abundance_df['gene_name'].tolist()
+    gene_lengths = gene_abundance_df['gene_length'].tolist()
+    nt_ovelaps = gene_abundance_df['nucleotide_overlap'].tolist()
+    list_reads_mapped = gene_abundance_df['reads_mapped'].tolist()
+
+    for gene_name, gene_length, nt_overlap, num_reads_mapped in list( zip(gene_names, gene_lengths, nt_ovelaps, list_reads_mapped) ):
+        print(gene_name, )
