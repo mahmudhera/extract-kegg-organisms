@@ -1,4 +1,5 @@
 import argparse
+import pandas as pd
 
 def parse_args(): # pragma: no cover
     parser = argparse.ArgumentParser(description="This script will take a list of <gene_id, ko_id> mapping, and also take the gene abundance information in a simulation. Then, this script will summarize the abundane information from gene level to KO level.",
@@ -13,4 +14,5 @@ if __name__ == '__main__':
     present_genes_filename = args.present_genes
     gene_abundance_filename = args.gene_abundance
 
-    print(present_genes_filename, gene_abundance_filename)
+    gene_abundance_df = pd.read_csv(gene_abundance_filename)
+    print(gene_abundance_df.sample(10))
