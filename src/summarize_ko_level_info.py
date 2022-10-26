@@ -20,14 +20,28 @@ if __name__ == '__main__':
     nt_ovelaps = gene_abundance_df['nucleotide_overlap'].tolist()
     list_reads_mapped = gene_abundance_df['reads_mapped'].tolist()
 
+    gene_koid_df = pd.read_csv(present_genes_filename)
+    gene_ids = gene_koid_df['gene_id'].tolist()
+    ko_ids = gene_koid_df['ko_id'].tolist()
+
+    gene_id_to_ko_id = {}
+    for gene_id, ko_id in list( zip(gene_ids, ko_ids) ):
+        gene_id_to_ko_id[gene_id] = ko_id
+
     total_num_reads = sum(list_reads_mapped)
     total_nucleotides_covered = sum(nt_ovelaps)
 
     ko_abundances = {}
 
-    for gene_name, gene_length, nt_overlap, num_reads_mapped in list( zip(gene_names, gene_lengths, nt_ovelaps, list_reads_mapped) ):
+    for gene_id, gene_length, nt_overlap, num_reads_mapped in list( zip(gene_names, gene_lengths, nt_ovelaps, list_reads_mapped) ):
         abundance_estimate_1 = 1.0 * num_reads_mapped / total_num_reads
         abundance_estimate_2 = 1.0 * nt_overlap / total_nucleotides_covered
 
-    gene_koid_df = pd.read_csv(present_genes_filename)
-    print(gene_koid_df.sample(10))
+        ko_id = gene_id_to_ko_id[gene_id]
+        if ko_id in ko_abundances.keys():
+            ko_abundances[ko_id] += abundance_estimate_1
+        else:
+            ko_abundances[ko_id] = abundance_estimate_1
+
+    for ko_id in ko_abundances.keys():
+        print(ko_id, ko_abundances[ko_id])
