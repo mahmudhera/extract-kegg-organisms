@@ -64,7 +64,7 @@ if __name__ == '__main__':
             ko_abundances_by_med_cov[ko_id] = abundance_estimate_5
 
     out_list = []
-    for ko_id in ko_abundances.keys():
+    for ko_id in ko_abundances_by_num_reads.keys():
         out_list.append((ko_id, ko_abundances_by_num_reads[ko_id], ko_abundances_by_num_nts_in_reads[ko_id], ko_abundances_by_mean_cov[ko_id], ko_abundances_by_med_cov[ko_id]))
 
     out_df = pd.DataFrame(out_list, columns=['ko_id', 'abund_by_num_reads', 'abund_by_nts_covered_in_reads', 'abund_by_mean_cov', 'abund_by_median_cov'])
