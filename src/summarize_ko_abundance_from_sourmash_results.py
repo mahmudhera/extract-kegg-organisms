@@ -32,7 +32,7 @@ if __name__=='__main__':
     ko_abundances = {}
     for gene_name, weight in list( zip(gene_names, weights) ):
         abundance = 1.0 * weight / total_weight
-        ko_id = gene_id_to_ko_id[gene_id]
+        ko_id = gene_id_to_ko_id[gene_name]
         if ko_id in ko_abundances.keys():
             ko_abundances[ko_id] += abundance
         else:
