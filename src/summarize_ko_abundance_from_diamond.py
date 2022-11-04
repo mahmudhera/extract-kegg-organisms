@@ -70,7 +70,7 @@ if __name__=='__main__':
 
     out_list = []
     for ko_id in ko_abund_by_num_reads.keys():
-        out_list.append( ko_id, ko_abund_by_num_reads[ko_id], ko_abund_by_num_nucleotides[ko_id] )
+        out_list.append( (ko_id, ko_abund_by_num_reads[ko_id], ko_abund_by_num_nucleotides[ko_id]) )
 
     out_df = pd.DataFrame(out_list, columns=['ko_id', 'abund_by_num_reads', 'abund_by_num_nts'])
     out_df.to_csv( output_filename )
