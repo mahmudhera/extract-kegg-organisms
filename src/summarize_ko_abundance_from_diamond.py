@@ -16,7 +16,7 @@ if __name__=='__main__':
     diamond_output_file = args.diamond_output
     output_filename = args.out_file
 
-    dmnd_output_df = pd.read_csv(diamond_output_file)
+    dmnd_output_df = pd.read_csv(diamond_output_file, delimiter='\t')
     read_names = [ name.split('$')[0] for name in dmnd_output_df['qseqid'].tolist() ]
     gene_names = [ name.split('|')[0] for name in dmnd_output_df['sseqid'].tolist() ]
     lengths = dmnd_output_df['length'].tolist()
